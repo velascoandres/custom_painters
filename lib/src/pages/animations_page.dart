@@ -31,11 +31,22 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
       vsync: this,
       duration: Duration(milliseconds: 4000),
     );
+    // this.rotacion = Tween(
+    //   begin: 0.0,
+    //   end: 2.0 *
+    //       Math.pi, // Miltiplique por PI para tener las 2 vueltas en los 4 segundos
+    // ).animate(this.animationController);
+
     this.rotacion = Tween(
       begin: 0.0,
       end: 2.0 *
           Math.pi, // Miltiplique por PI para tener las 2 vueltas en los 4 segundos
-    ).animate(this.animationController);
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.easeInBack,
+      ),
+    );
 
     this.animationController.addListener(
       () {
