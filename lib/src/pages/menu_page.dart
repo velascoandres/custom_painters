@@ -50,6 +50,11 @@ class MenuPage extends StatelessWidget {
               title: Text('Gradient Wave'),
               onTap: this._navigateTo(context, 'gradient-page'),
             ),
+            ListTile(
+              leading: Icon(Icons.waves_sharp),
+              title: Text('Animations'),
+              onTap: this._navigateTo(context, 'animations-page'),
+            ),
           ],
         ),
       ),
