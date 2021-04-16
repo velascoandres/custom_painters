@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as Math;
 
 class AnimationsPage extends StatelessWidget {
   const AnimationsPage({Key key}) : super(key: key);
@@ -32,8 +33,22 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
     );
     this.rotacion = Tween(
       begin: 0.0,
-      end: 2.0,
+      end: 2.0 *
+          Math.pi, // Miltiplique por PI para tener las 2 vueltas en los 4 segundos
     ).animate(this.animationController);
+
+    this.animationController.addListener(
+      () {
+        print('Stattus: ${this.animationController.status}');
+
+        // if (this.animationController.status == AnimationStatus.completed) {
+        //   this.animationController.reverse();
+        // } else if (this.animationController.status ==
+        //     AnimationStatus.dismissed) {
+        //   this.animationController.forward();
+        // }
+      },
+    );
 
     super.initState();
   }
@@ -47,13 +62,13 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
   @override
   Widget build(BuildContext context) {
     // Play - Reproduccion
-    this.animationController.forward();
+    //this.animationController.forward();
+    this.animationController.repeat();
 
     return AnimatedBuilder(
       animation: this.animationController,
       child: _Rectangulo(),
       builder: (BuildContext context, Widget child) {
-        
         return Transform.rotate(
           angle: rotacion.value,
           child: child,
