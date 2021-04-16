@@ -24,6 +24,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
   AnimationController animationController;
   // Que tipo de cosa se quiere animar
   Animation<double> rotacion;
+  Animation<double> opacidad;
 
   @override
   void initState() {
@@ -47,6 +48,11 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
         curve: Curves.easeInBack,
       ),
     );
+
+    this.opacidad = Tween(
+      begin: 0.1,
+      end: 1.0,
+    ).animate(animationController);
 
     this.animationController.addListener(
       () {
@@ -82,7 +88,10 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
       builder: (BuildContext context, Widget child) {
         return Transform.rotate(
           angle: rotacion.value,
-          child: child,
+          child: Opacity(
+            opacity: opacidad.value,
+            child: child,
+          ),
         );
       },
     );
