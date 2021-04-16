@@ -52,7 +52,12 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
     this.opacidad = Tween(
       begin: 0.1,
       end: 1.0,
-    ).animate(animationController);
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Interval(0, 0.25, curve: Curves.easeOut), // Controlar en que punto del tiempo se de la animacion
+      ),
+    );
 
     this.animationController.addListener(
       () {
