@@ -25,6 +25,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
   // Que tipo de cosa se quiere animar
   Animation<double> rotacion;
   Animation<double> opacidad;
+  Animation<double> moverDerecha;
 
   @override
   void initState() {
@@ -55,7 +56,19 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
     ).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Interval(0, 0.25, curve: Curves.easeOut), // Controlar en que punto del tiempo se de la animacion
+        curve: Interval(0, 0.25,
+            curve: Curves
+                .easeOut), // Controlar en que punto del tiempo se de la animacion
+      ),
+    );
+
+    this.moverDerecha = Tween(
+      begin: 0.0,
+      end: 200.0,
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.easeInBack,
       ),
     );
 
@@ -91,11 +104,14 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
       animation: this.animationController,
       child: _Rectangulo(),
       builder: (BuildContext context, Widget child) {
-        return Transform.rotate(
-          angle: rotacion.value,
-          child: Opacity(
-            opacity: opacidad.value,
-            child: child,
+        return Transform.translate(
+          offset: Offset(moverDerecha.value, 0),
+          child: Transform.rotate(
+            angle: rotacion.value,
+            child: Opacity(
+              opacity: opacidad.value,
+              child: child,
+            ),
           ),
         );
       },
