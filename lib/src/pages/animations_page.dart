@@ -26,6 +26,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
   Animation<double> rotacion;
   Animation<double> opacidad;
   Animation<double> moverDerecha;
+  Animation<double> agrandar;
 
   @override
   void initState() {
@@ -46,7 +47,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
     ).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Curves.easeInBack,
+        curve: Curves.easeOut,
       ),
     );
 
@@ -68,7 +69,17 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
     ).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Curves.easeInBack,
+        curve: Curves.easeOut,
+      ),
+    );
+
+    this.agrandar = Tween(
+      begin: 0.0,
+      end: 2.0,
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.easeOut,
       ),
     );
 
@@ -110,7 +121,10 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
             angle: rotacion.value,
             child: Opacity(
               opacity: opacidad.value,
-              child: child,
+              child: Transform.scale(
+                scale: agrandar.value,
+                child: child,
+              ),
             ),
           ),
         );
