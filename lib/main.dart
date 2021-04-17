@@ -1,3 +1,4 @@
+import 'package:custom_painters/src/pages/circular_progress_page.dart';
 import 'package:custom_painters/src/retos/cuadrado_animado_page.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         'gradient-page': (context) => GradientWaveHeaderPage(),
         'animations-page': (context) => AnimationsPage(),
         'cuadrado-animado-page': (context) => CuadradoAnimadoPage(),
+        'circular-progress-page': (context) => CircularProgressPage(),
       },
     );
   }

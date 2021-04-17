@@ -60,6 +60,11 @@ class MenuPage extends StatelessWidget {
               title: Text('Cuadrado animado'),
               onTap: this._navigateTo(context, 'cuadrado-animado-page'),
             ),
+            ListTile(
+              leading: Icon(Icons.airplanemode_active),
+              title: Text('Circular progress'),
+              onTap: this._navigateTo(context, 'circular-progress-page'),
+            ),
           ],
         ),
       ),
