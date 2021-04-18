@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -116,7 +117,6 @@ class _MiRadialProgress extends CustomPainter {
     // Circulo completado
     final paint = new Paint()
       ..strokeWidth = this.grosorSecundario
-      ..color = colorSecundario
       ..style = PaintingStyle.stroke;
 
     Offset center = new Offset(size.width * 0.5, size.height * 0.5);
@@ -124,26 +124,63 @@ class _MiRadialProgress extends CustomPainter {
     canvas.drawCircle(center, radio, paint);
 
     // Arco
-    final paintArco = new Paint()
+    // final paintArco = new Paint()
+    //   ..strokeWidth = this.grosorPrimario
+    //   ..color = primaryColor
+    //   ..style = PaintingStyle.stroke;
+
+    // // Parte que se debera ir llenando
+
+    // double arcAngle = 2 * pi * (porcentaje / 100);
+    // canvas.drawArc(
+    //   Rect.fromCircle(
+    //       center: center, radius: radio), // Espacio donde se va ubicar
+    //   -pi / 2,
+    //   arcAngle,
+    //   false,
+    //   paintArco,
+    // );
+    // Circulos referencia
+    final paintCirculoPequenios = new Paint()
+      ..strokeWidth = this.grosorSecundario
+      ..color = this.colorSecundario
+      ..style = PaintingStyle.fill;
+    this.dibujarCirculos(paintCirculoPequenios, canvas, 100.0, radio, 5);
+    // Circulo progreso
+    final paintCirculo = new Paint()
       ..strokeWidth = this.grosorPrimario
-      ..color = primaryColor
-      ..style = PaintingStyle.stroke;
-
-    // Parte que se debera ir llenando
-
-    double arcAngle = 2 * pi * (porcentaje / 100);
-    canvas.drawArc(
-      Rect.fromCircle(
-          center: center, radius: radio), // Espacio donde se va ubicar
-      -pi / 2,
-      arcAngle,
-      false,
-      paintArco,
-    );
+      ..color = this.primaryColor
+      ..style = PaintingStyle.fill;
+    this.dibujarCirculos(paintCirculo, canvas, porcentaje, radio, 10);
+    // 360 / 18 = 20
+    // angulo inicial = 0
+    // x1, y1 = 0,r
+    // sen(20) = x2/r
+    // x2 = r * sen(20)
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
+  }
+
+  void dibujarCirculos(
+    Paint paint,
+    Canvas canvas,
+    double covertura,
+    double radio,
+    double radioCirculo,
+  ) {
+    for (int i = 0; i <= covertura.ceil(); i += 5) {
+      double angulo = 2 * pi * (i / 100);
+      double x2 = radio * sin(angulo);
+      double y2 = radio * cos(angulo);
+      print(angulo);
+      canvas.drawCircle(
+        Offset(x2 + radio, -y2 + radio),
+        radioCirculo,
+        paint,
+      );
+    }
   }
 }
