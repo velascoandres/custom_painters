@@ -4,8 +4,18 @@ import 'package:flutter/material.dart';
 
 class RadialProgress extends StatefulWidget {
   final double porcentaje;
+  final Color colorPrimario;
+  final Color colorSecundario;
+  final double grosorSecundario;
+  final double grosorPrimario;
 
-  RadialProgress({this.porcentaje});
+  RadialProgress({
+    @required this.porcentaje,
+    this.colorPrimario = Colors.blue,
+    this.colorSecundario = Colors.grey,
+    this.grosorSecundario = 20,
+    this.grosorPrimario = 20,
+  });
 
   @override
   _RadialProgressState createState() => _RadialProgressState();
@@ -51,6 +61,10 @@ class _RadialProgressState extends State<RadialProgress>
             painter: _MiRadialProgress(
               (widget.porcentaje - diferenciaAnimar) +
                   diferenciaAnimar * controller.value,
+              widget.colorPrimario,
+              widget.colorSecundario,
+              widget.grosorSecundario,
+              widget.grosorPrimario,
             ),
           ),
         );
@@ -61,15 +75,25 @@ class _RadialProgressState extends State<RadialProgress>
 
 class _MiRadialProgress extends CustomPainter {
   final double porcentaje;
+  final Color primaryColor;
+  final Color colorSecundario;
+  final double grosorSecundario;
+  final double grosorPrimario;
 
-  _MiRadialProgress(this.porcentaje);
+  _MiRadialProgress(
+    this.porcentaje,
+    this.primaryColor,
+    this.colorSecundario,
+    this.grosorSecundario,
+    this.grosorPrimario,
+  );
 
   @override
   void paint(Canvas canvas, Size size) {
     // Circulo completado
     final paint = new Paint()
-      ..strokeWidth = 4
-      ..color = Colors.grey
+      ..strokeWidth = this.grosorSecundario
+      ..color = colorSecundario
       ..style = PaintingStyle.stroke;
 
     Offset center = new Offset(size.width * 0.5, size.height * 0.5);
@@ -78,8 +102,8 @@ class _MiRadialProgress extends CustomPainter {
 
     // Arco
     final paintArco = new Paint()
-      ..strokeWidth = 10
-      ..color = Colors.pink
+      ..strokeWidth = this.grosorPrimario
+      ..color = primaryColor
       ..style = PaintingStyle.stroke;
 
     // Parte que se debera ir llenando
