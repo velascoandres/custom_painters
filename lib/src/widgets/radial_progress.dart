@@ -90,6 +90,29 @@ class _MiRadialProgress extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    // Texto Porcentaje
+    TextSpan span = new TextSpan(
+      style: new TextStyle(
+        color: Colors.blue[800],
+        fontSize: 24.0,
+        fontFamily: 'Roboto',
+      ),
+      text: '${porcentaje.ceil()}%',
+    );
+
+    TextPainter tp = new TextPainter(
+      text: span,
+      textAlign: TextAlign.center,
+      textDirection: TextDirection.rtl,
+    );
+    tp.layout();
+    tp.paint(
+        canvas,
+        new Offset(
+          porcentaje < 10 ? size.width * 0.45 : size.width * 0.37,
+          size.height * 0.4,
+        ));
+
     // Circulo completado
     final paint = new Paint()
       ..strokeWidth = this.grosorSecundario
