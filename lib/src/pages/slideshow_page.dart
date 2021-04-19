@@ -33,10 +33,10 @@ class _Dots extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _Dot(),
-          _Dot(),
-          _Dot(),
-          _Dot(),
+          _Dot(0),
+          _Dot(1),
+          _Dot(2),
+          _Dot(3),
         ],
       ),
     );
@@ -44,6 +44,10 @@ class _Dots extends StatelessWidget {
 }
 
 class _Dot extends StatelessWidget {
+  final int index;
+
+  const _Dot(this.index);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,26 +62,42 @@ class _Dot extends StatelessWidget {
   }
 }
 
-class _Slides extends StatelessWidget {
+class _Slides extends StatefulWidget {
   const _Slides({Key key}) : super(key: key);
+
+  @override
+  __SlidesState createState() => __SlidesState();
+}
+
+class __SlidesState extends State<_Slides> {
+  final PageController pageController = new PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    pageController.addListener(
+      () {
+        print('Página actual: ${pageController.page}');
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: PageView(
+        controller: pageController,
         children: [
-          _Slide(
-            svg: 'assets/svgs/slide-1.svg',
-          ),
-          _Slide(
-            svg: 'assets/svgs/slide-2.svg',
-          ),
-          _Slide(
-            svg: 'assets/svgs/slide-3.svg',
-          ),
-          _Slide(
-            svg: 'assets/svgs/slide-4.svg',
-          ),
+          _Slide(svg: 'assets/svgs/slide-1.svg'),
+          _Slide(svg: 'assets/svgs/slide-2.svg'),
+          _Slide(svg: 'assets/svgs/slide-3.svg'),
+          _Slide(svg: 'assets/svgs/slide-4.svg'),
         ],
       ),
     );
