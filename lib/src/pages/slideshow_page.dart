@@ -8,13 +8,55 @@ class SlideShowPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: _Slides(),
+        child: Column(
+          children: [
+            Expanded(
+              // Para utilizar todo el espacio posible
+              child: _Slides(),
+            ),
+            _Dots(),
+          ],
+        ),
       ),
     );
   }
 }
 
-// SvgPicture.asset('assets/svgs/slide-1.svg')
+class _Dots extends StatelessWidget {
+  const _Dots({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 70,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _Dot(),
+          _Dot(),
+          _Dot(),
+          _Dot(),
+        ],
+      ),
+    );
+  }
+}
+
+class _Dot extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 12,
+      height: 12,
+      margin: EdgeInsets.symmetric(horizontal: 5),
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+}
 
 class _Slides extends StatelessWidget {
   const _Slides({Key key}) : super(key: key);
@@ -24,10 +66,18 @@ class _Slides extends StatelessWidget {
     return Container(
       child: PageView(
         children: [
-          _Slide(svg: 'assets/svgs/slide-1.svg',),
-          _Slide(svg: 'assets/svgs/slide-2.svg',),
-          _Slide(svg: 'assets/svgs/slide-3.svg',),
-          _Slide(svg: 'assets/svgs/slide-4.svg',),
+          _Slide(
+            svg: 'assets/svgs/slide-1.svg',
+          ),
+          _Slide(
+            svg: 'assets/svgs/slide-2.svg',
+          ),
+          _Slide(
+            svg: 'assets/svgs/slide-3.svg',
+          ),
+          _Slide(
+            svg: 'assets/svgs/slide-4.svg',
+          ),
         ],
       ),
     );
