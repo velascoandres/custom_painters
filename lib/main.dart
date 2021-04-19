@@ -1,6 +1,6 @@
-import 'package:custom_painters/src/pages/slideshow_page.dart';
 import 'package:flutter/material.dart';
 
+import 'package:custom_painters/src/pages/slideshow_page.dart';
 import 'package:custom_painters/src/pages/graficas_circulares_page.dart';
 import 'package:custom_painters/src/retos/cuadrado_animado_page.dart';
 import 'package:custom_painters/src/pages/animations_page.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         'animations-page': (context) => AnimationsPage(),
         'cuadrado-animado-page': (context) => CuadradoAnimadoPage(),
         'circular-progress-page': (context) => GraficasCircularesPage(),
-        'slideshow-page': (context) => SlideShowPage(),
+        'slideshow-page': (context) => SlideshowPage(),
       },
     );
   }
