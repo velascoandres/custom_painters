@@ -1,3 +1,4 @@
+import 'package:custom_painters/src/widgets/pinterest_meu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -6,7 +7,7 @@ class PinterestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: PinterestGrid(),
+        child: PinterestMenu(),
       ),
     );
   }
@@ -39,16 +40,17 @@ class _PinterestItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-        margin: EdgeInsets.all(5),
-        decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.all(Radius.circular(30)),
+      margin: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.all(Radius.circular(30)),
+      ),
+      child: new Center(
+        child: new CircleAvatar(
+          backgroundColor: Colors.white,
+          child: new Text('$index'),
         ),
-        child: new Center(
-          child: new CircleAvatar(
-            backgroundColor: Colors.white,
-            child: new Text('$index'),
-          ),
-        ));
+      ),
+    );
   }
 }
