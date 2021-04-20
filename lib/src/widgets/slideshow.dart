@@ -1,30 +1,70 @@
-import 'package:custom_painters/src/models/slider_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SlideShow extends StatelessWidget {
   final List<Widget> slides;
+  final bool dotsTop;
+  final Color primaryColor;
+  final Color secondaryColor;
+  final double primaryDotSize;
+  final double secondaryDotSize;
 
   const SlideShow({
     Key key,
     @required this.slides,
+    this.dotsTop = false,
+    this.primaryColor = Colors.blue,
+    this.secondaryColor = Colors.grey,
+    this.primaryDotSize = 12,
+    this.secondaryDotSize = 12,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => new SliderModel(),
-      child: Center(
-        child: Column(
-          children: [
-            Expanded(
-              // Para utilizar todo el espacio posible
-              child: _Slides(slides),
-            ),
-            _Dots(slides.length),
-          ],
+      create: (_) => new _SliderModel(),
+      child: SafeArea(
+        child: Center(
+          child: Builder(
+            builder: (BuildContext context) {
+              Provider.of<_SliderModel>(context).primaryColor =
+                  this.primaryColor;
+              Provider.of<_SliderModel>(context).secondaryColor =
+                  this.secondaryColor;
+              Provider.of<_SliderModel>(context).primaryDotSize =
+                  this.primaryDotSize;
+              Provider.of<_SliderModel>(context).secondaryDotSize =
+                  this.secondaryDotSize;
+              return _SliderShowStruct(dotsTop: dotsTop, slides: slides);
+            },
+          ),
         ),
       ),
+    );
+  }
+}
+
+class _SliderShowStruct extends StatelessWidget {
+  const _SliderShowStruct({
+    Key key,
+    @required this.dotsTop,
+    @required this.slides,
+  }) : super(key: key);
+
+  final bool dotsTop;
+  final List<Widget> slides;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        if (this.dotsTop) _Dots(slides.length),
+        Expanded(
+          // Para utilizar todo el espacio posible
+          child: _Slides(slides),
+        ),
+        if (!this.dotsTop) _Dots(slides.length),
+      ],
     );
   }
 }
@@ -61,17 +101,24 @@ class _Dot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pageIndex = Provider.of<SliderModel>(context).currentPage;
-
+    final slideModel = Provider.of<_SliderModel>(context);
+    double dotSize = 0;
+    Color dotColor;
+    if (slideModel.currentPage >= index - 0.5 &&
+        slideModel.currentPage < index + 0.5) {
+      dotColor = slideModel.primaryColor;
+      dotSize = slideModel.primaryDotSize;
+    } else {
+      dotColor = slideModel.secondaryColor;
+      dotSize = slideModel.secondaryDotSize;
+    }
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
-      width: 12,
-      height: 12,
+      width: dotSize,
+      height: dotSize,
       margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
-        color: (pageIndex >= index - 0.5 && pageIndex < index + 0.5)
-            ? Colors.blue
-            : Colors.grey,
+        color: dotColor,
         shape: BoxShape.circle,
       ),
     );
@@ -96,7 +143,7 @@ class __SlidesState extends State<_Slides> {
     pageController.addListener(() {
       // Actualizar el provider, sliderModel
       // Siempre que se lo usa en el initState se lo pone en false
-      Provider.of<SliderModel>(context, listen: false).currentPage =
+      Provider.of<_SliderModel>(context, listen: false).currentPage =
           pageController.page;
     });
   }
@@ -131,5 +178,44 @@ class _Slide extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: slide,
     );
+  }
+}
+
+class _SliderModel with ChangeNotifier {
+  double _currentPage = 0;
+
+  Color _primaryColor;
+  Color _secondaryColor;
+
+  double _primaryDotSize;
+  double _secondaryDotSize;
+
+  double get primaryDotSize => this._primaryDotSize;
+  double get secondaryDotSize => this._secondaryDotSize;
+
+  double get currentPage => this._currentPage;
+
+  Color get primaryColor => this._primaryColor;
+  Color get secondaryColor => this._secondaryColor;
+
+  set currentPage(double currentPage) {
+    this._currentPage = currentPage;
+    notifyListeners();
+  }
+
+  set primaryColor(Color color) {
+    this._primaryColor = color;
+  }
+
+  set secondaryColor(Color color) {
+    this._secondaryColor = color;
+  }
+
+  set secondaryDotSize(double size) {
+    this._secondaryDotSize = size;
+  }
+
+  set primaryDotSize(double size) {
+    this._primaryDotSize = size;
   }
 }
