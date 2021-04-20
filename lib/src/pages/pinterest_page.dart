@@ -1,7 +1,9 @@
-import 'package:custom_painters/src/widgets/pinterest_meu.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import 'package:provider/provider.dart';
+
+import 'package:custom_painters/src/widgets/pinterest_meu.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class PinterestPage extends StatelessWidget {
   @override
@@ -35,6 +37,32 @@ class _PinterestMenuLocation extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: PinterestMenu(
+          items: [
+            PinterestMenuButton(
+              icon: Icons.pie_chart,
+              onPressed: () {
+                print('Icon pie_chart');
+              },
+            ),
+            PinterestMenuButton(
+              icon: Icons.search,
+              onPressed: () {
+                print('Icon search');
+              },
+            ),
+            PinterestMenuButton(
+              icon: Icons.notifications,
+              onPressed: () {
+                print('Icon notificartion');
+              },
+            ),
+            PinterestMenuButton(
+              icon: Icons.supervised_user_circle,
+              onPressed: () {
+                print('Icon supervised_user_circle');
+              },
+            ),
+          ],
           show: provider.show,
           activeColor: Colors.red,
           backgroundColor: Colors.amber,
