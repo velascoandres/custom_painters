@@ -3,6 +3,77 @@ import 'package:flutter/material.dart';
 
 
 
+class MenuHeadersPage extends StatelessWidget {
+  const MenuHeadersPage({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      routes: {
+        'wave-page': (context) => HeadersPage(),
+        'square-page': (context) => SquareHeaderPage(),
+        'diagonal-page': (context) => DiagonalHeaderPage(),
+        'triangular-page': (context) => TriangularHeaderPage(),
+        'circular-page': (context) => CircularHeadersPage(),
+        'curve-page': (context) => CurveHeadersPage(),
+        'pico-page': (context) => PicoHeaderPage(),
+      },
+      home: Scaffold(
+        body: Container(
+          child: ListView(
+            children: [
+              ListTile(
+              leading: Icon(Icons.add_box),
+              title: Text('Square'),
+              onTap: this._navigateTo(context, 'square-page'),
+            ),
+            ListTile(
+              leading: Icon(Icons.square_foot),
+              title: Text('Diagonal'),
+              onTap: this._navigateTo(context, 'diagonal-page'),
+            ),
+            ListTile(
+              leading: Icon(Icons.text_rotation_angledown),
+              title: Text('Triangular'),
+              onTap: this._navigateTo(context, 'triangular-page'),
+            ),
+            ListTile(
+              leading: Icon(Icons.square_foot),
+              title: Text('Pico'),
+              onTap: this._navigateTo(context, 'pico-page'),
+            ),
+            ListTile(
+              leading: Icon(Icons.rounded_corner),
+              title: Text('Circular'),
+              onTap: this._navigateTo(context, 'circular-page'),
+            ),
+            ListTile(
+              leading: Icon(Icons.add_circle_outline),
+              title: Text('Curve'),
+              onTap: this._navigateTo(context, 'curve-page'),
+            ),
+            ListTile(
+              leading: Icon(Icons.waves),
+              title: Text('Wave'),
+              onTap: this._navigateTo(context, 'wave-page'),
+            ),
+            ListTile(
+              leading: Icon(Icons.waves_sharp),
+              title: Text('Gradient Wave'),
+              onTap: this._navigateTo(context, 'gradient-page'),
+            ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  _navigateTo(BuildContext context, String route) {
+    return () => Navigator.of(context).pushNamed(route);
+  }
+}
+
+
 class HeadersPage extends StatelessWidget {
   const HeadersPage({Key key}) : super(key: key);
 
