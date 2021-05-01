@@ -1,3 +1,4 @@
+import 'package:custom_painters/src/pages/emergency_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:custom_painters/src/pages/graficas_circulares_page.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         'animations-page': (context) => AnimationsPage(),
         'cuadrado-animado-page': (context) => CuadradoAnimadoPage(),
         'circular-progress-page': (context) => GraficasCircularesPage(),
+        'emergency-page': (context) => EmergencyPage(),
       },
     );
   }

@@ -65,6 +65,11 @@ class MenuPage extends StatelessWidget {
               title: Text('Circular progress'),
               onTap: this._navigateTo(context, 'circular-progress-page'),
             ),
+            ListTile(
+              leading: Icon(Icons.medical_services),
+              title: Text('Emergency'),
+              onTap: this._navigateTo(context, 'emergency-page'),
+            ),
           ],
         ),
       ),
