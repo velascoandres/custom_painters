@@ -2,6 +2,7 @@ import 'package:custom_painters/src/widgets/fat_button.dart';
 import 'package:custom_painters/src/widgets/headers/headers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:animate_do/animate_do.dart';
 
 class ItemBoton {
   final IconData icon;
@@ -48,18 +49,21 @@ class EmergencyPage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 200),
+            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15,),
             child: ListView(
               physics: BouncingScrollPhysics(),
               children: [
                 SizedBox(height: 80),
                 ...items.map(
-                  (item) => BotonGordo(
-                    onPress: () {},
-                    icon: item.icon,
-                    texto: item.texto,
-                    color1: item.color1,
-                    color2: item.color2,
+                  (item) => FadeInLeft(
+                    duration: Duration(milliseconds: 500),
+                    child: BotonGordo(
+                      onPress: () {},
+                      icon: item.icon,
+                      texto: item.texto,
+                      color1: item.color1,
+                      color2: item.color2,
+                    ),
                   ),
                 )
               ],
