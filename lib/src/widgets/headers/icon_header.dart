@@ -30,29 +30,29 @@ class IconHeader extends StatelessWidget {
           top: -50,
           child: FaIcon(
             this.icon,
-            size: 250,
+            size: MediaQuery.of(context).size.height * 0.31,
             color: Colors.white.withOpacity(0.2),
           ),
         ),
         Column(
           children: [
-            SizedBox(height: 80, width: double.infinity),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.10, width: double.infinity),
             Text(
               '${this.subtitulo}',
-              style: TextStyle(fontSize: 20, color: this.colorBlanco),
+              style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.02, color: this.colorBlanco),
             ),
             SizedBox(height: 20),
             Text(
               '${this.titulo}',
               style: TextStyle(
-                fontSize: 25,
+                fontSize: MediaQuery.of(context).size.height * 0.03,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
             FaIcon(
               this.icon,
-              size: 80,
+              size: MediaQuery.of(context).size.height * 0.05,
               color: Colors.white,
             ),
           ],
@@ -76,7 +76,7 @@ class _IconHeaderBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 300,
+      height: MediaQuery.of(context).size.height * 0.25,
       decoration: BoxDecoration(
         color: Colors.red,
         borderRadius: BorderRadius.only(
