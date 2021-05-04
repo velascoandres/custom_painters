@@ -31,7 +31,7 @@ class BotonGordo extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 100, width: 40),
+              SizedBox(height: 120, width: 40),
               FaIcon(this.icon, color: Colors.white, size: 40),
               SizedBox(width: 20),
               Expanded(
@@ -82,7 +82,7 @@ class _BotonGordoBackground extends StatelessWidget {
       ),
       width: double.infinity,
       height: 100,
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         boxShadow: <BoxShadow>[
