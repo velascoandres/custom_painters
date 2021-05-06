@@ -1,6 +1,7 @@
 import 'package:custom_painters/src/pages/emergency_page.dart';
 import 'package:custom_painters/src/pages/menu_page.dart';
 import 'package:custom_painters/src/pages/pinterest_page.dart';
+import 'package:custom_painters/src/pages/sliver_list_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:custom_painters/src/pages/slideshow_page.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         'emergency-page': (context) => EmergencyPage(),
         'slideshow-page': (context) => SlideshowPage(),
         'pinterest-page': (context) => PinterestPage(),
+        'sliver-page': (context) => SliverListPage(),
       },
     );
   }

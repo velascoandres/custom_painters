@@ -45,6 +45,11 @@ class MenuPage extends StatelessWidget {
               title: Text('Pinterest Page'),
               onTap: this._navigateTo(context, 'pinterest-page'),
             ),
+            ListTile(
+              leading: Icon(Icons.slow_motion_video),
+              title: Text('Sliver Page'),
+              onTap: this._navigateTo(context, 'sliver-page'),
+            ),
           ],
         ),
       ),
