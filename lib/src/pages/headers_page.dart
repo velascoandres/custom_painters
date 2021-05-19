@@ -1,28 +1,30 @@
+import 'package:custom_painters/src/theme/theme.dart';
 import 'package:custom_painters/src/widgets/headers/headers.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+final routes = {
+  'wave-page': (context) => HeadersPage(),
+  'square-page': (context) => SquareHeaderPage(),
+  'diagonal-page': (context) => DiagonalHeaderPage(),
+  'triangular-page': (context) => TriangularHeaderPage(),
+  'circular-page': (context) => CircularHeadersPage(),
+  'curve-page': (context) => CurveHeadersPage(),
+  'pico-page': (context) => PicoHeaderPage(),
+  'gradient-page': (context) => GradientWaveHeaderPage(),
 
+};
 
 class MenuHeadersPage extends StatelessWidget {
   const MenuHeadersPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        'wave-page': (context) => HeadersPage(),
-        'square-page': (context) => SquareHeaderPage(),
-        'diagonal-page': (context) => DiagonalHeaderPage(),
-        'triangular-page': (context) => TriangularHeaderPage(),
-        'circular-page': (context) => CircularHeadersPage(),
-        'curve-page': (context) => CurveHeadersPage(),
-        'pico-page': (context) => PicoHeaderPage(),
-      },
-      home: Scaffold(
-        body: Container(
-          child: ListView(
-            children: [
-              ListTile(
+    return Scaffold(
+      body: Container(
+        child: ListView(
+          children: [
+            ListTile(
               leading: Icon(Icons.add_box),
               title: Text('Square'),
               onTap: this._navigateTo(context, 'square-page'),
@@ -62,17 +64,21 @@ class MenuHeadersPage extends StatelessWidget {
               title: Text('Gradient Wave'),
               onTap: this._navigateTo(context, 'gradient-page'),
             ),
-            ],
-          ),
+          ],
         ),
       ),
     );
   }
+
   _navigateTo(BuildContext context, String route) {
-    return () => Navigator.of(context).pushNamed(route);
+    return () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: routes[route],
+          ),
+        );
   }
 }
-
 
 class HeadersPage extends StatelessWidget {
   const HeadersPage({Key key}) : super(key: key);
@@ -80,109 +86,98 @@ class HeadersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pop(),
-        child: Icon(Icons.menu),
-      ),
-      body: WaveHeader()
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Icon(Icons.menu),
+        ),
+        body: WaveHeader());
   }
 }
 
 class CircularHeadersPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pop(),
-        child: Icon(Icons.menu),
-      ),
-      body: CircularHeader()
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Icon(Icons.menu),
+        ),
+        body: CircularHeader());
   }
 }
 
 class CurveHeadersPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pop(),
-        child: Icon(Icons.menu),
-      ),
-      body: CurveHeader()
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Icon(Icons.menu),
+        ),
+        body: CurveHeader(
+          color: appTheme.accentColor,
+        ));
   }
 }
 
 class DiagonalHeaderPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pop(),
-        child: Icon(Icons.menu),
-      ),
-      body: DiagonalHeader()
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Icon(Icons.menu),
+        ),
+        body: DiagonalHeader());
   }
 }
 
 class PicoHeaderPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pop(),
-        child: Icon(Icons.menu),
-      ),
-      body: PicoHeader()
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Icon(Icons.menu),
+        ),
+        body: PicoHeader());
   }
 }
 
 class TriangularHeaderPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pop(),
-        child: Icon(Icons.menu),
-      ),
-      body: TriangularHeader()
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Icon(Icons.menu),
+        ),
+        body: TriangularHeader());
   }
 }
 
 class SquareHeaderPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pop(),
-        child: Icon(Icons.menu),
-      ),
-      body: SquareHeader()
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Icon(Icons.menu),
+        ),
+        body: SquareHeader());
   }
 }
 
 class GradientWaveHeaderPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pop(),
-        child: Icon(Icons.menu),
-      ),
-      body: GradientWaveHeader()
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Icon(Icons.menu),
+        ),
+        body: GradientWaveHeader());
   }
 }

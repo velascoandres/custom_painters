@@ -1,5 +1,7 @@
+import 'package:custom_painters/src/theme/theme.dart';
 import 'package:custom_painters/src/widgets/radial_progress.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class GraficasCircularesPage extends StatefulWidget {
   const GraficasCircularesPage({Key key}) : super(key: key);
@@ -13,6 +15,7 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -71,12 +74,16 @@ class CustomRadialProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return Container(
       width: 180,
       height: 180,
       child: RadialProgress(
         porcentaje: porcentaje,
         colorPrimario: this.color,
+        colorSecundario: appTheme.textTheme.bodyText1.color,
       ),
     );
   }

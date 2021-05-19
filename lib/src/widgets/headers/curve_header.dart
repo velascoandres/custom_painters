@@ -1,7 +1,10 @@
 part of 'headers.dart';
 
 class CurveHeader extends StatelessWidget {
-  const CurveHeader({Key key}) : super(key: key);
+
+  final Color color;
+
+  const CurveHeader({Key key, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,20 +12,24 @@ class CurveHeader extends StatelessWidget {
       height: double.infinity,
       width: double.infinity,
       child: CustomPaint(
-        painter: _CurveHeaderPainter(),
+        painter: _CurveHeaderPainter(this.color),
       ),
     );
   }
 }
 
 class _CurveHeaderPainter extends CustomPainter {
+
+  final Color color;
+
+  _CurveHeaderPainter(this.color);
   @override
   void paint(Canvas canvas, Size size) {
     // The pencil
     final paint = Paint();
 
     // Pencil Properties
-    paint.color = Color(0xff615AAB);
+    paint.color = this.color;
     paint.style = PaintingStyle.fill; // .stroke solo es para lineas
     paint.strokeWidth = 21.0;
 

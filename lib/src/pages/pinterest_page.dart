@@ -1,3 +1,4 @@
+import 'package:custom_painters/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -31,7 +32,11 @@ class _PinterestMenuLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<_MenuModel>(context);
-
+    final appTheme = Provider.of<ThemeChanger>(context);
+    final primaryColor = appTheme.currentTheme.primaryColor;
+    final accentColor = appTheme.currentTheme.accentColor;
+    final backgroundColor = appTheme.currentTheme.scaffoldBackgroundColor;
+    
     return Positioned.fill(
       bottom: 10,
       child: Align(
@@ -64,9 +69,9 @@ class _PinterestMenuLocation extends StatelessWidget {
             ),
           ],
           show: provider.show,
-          activeColor: Colors.red,
-          backgroundColor: Colors.amber,
-          inactiveColor: Colors.black45,
+          activeColor: accentColor,
+          backgroundColor: backgroundColor,
+          inactiveColor: Colors.grey,
         ),
       ),
     );
