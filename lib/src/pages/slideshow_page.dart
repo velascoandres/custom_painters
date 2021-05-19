@@ -1,15 +1,20 @@
+import 'package:custom_painters/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:custom_painters/src/widgets/slideshow.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class SlideshowPage extends StatelessWidget {
   const SlideshowPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
+    final primaryColor = appTheme.currentTheme.primaryColor;
+
     return Scaffold(
-      backgroundColor: Colors.purple,
+      backgroundColor: (appTheme.darkTheme) ? primaryColor : Colors.white,
       body: Column(
         children: [
           Expanded(child: MiSlideShow()),
