@@ -1,4 +1,5 @@
 import 'package:custom_painters/src/pages/emergency_page.dart';
+import 'package:custom_painters/src/pages/launcher_page.dart';
 import 'package:custom_painters/src/pages/menu_page.dart';
 import 'package:custom_painters/src/pages/pinterest_page.dart';
 import 'package:custom_painters/src/pages/sliver_list_page.dart';
@@ -18,18 +19,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Diseños App',
       debugShowCheckedModeBanner: false,
-      initialRoute: 'menu-page',
-      routes: {
-        'menu-page': (context) => MenuPage(),
-        'painters-page': (context) => MenuHeadersPage(),
-        'animations-page': (context) => AnimationsPage(),
-        'cuadrado-animado-page': (context) => CuadradoAnimadoPage(),
-        'circular-progress-page': (context) => GraficasCircularesPage(),
-        'emergency-page': (context) => EmergencyPage(),
-        'slideshow-page': (context) => SlideshowPage(),
-        'pinterest-page': (context) => PinterestPage(),
-        'sliver-page': (context) => SliverListPage(),
-      },
+      home: LauncherPage(),
+      // initialRoute: 'menu-page',
+      
     );
   }
 }
