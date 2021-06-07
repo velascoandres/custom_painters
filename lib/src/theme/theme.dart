@@ -12,26 +12,27 @@ class ThemeChanger with ChangeNotifier {
   ThemeData get currentTheme => this._currentTheme;
 
   ThemeData get _darkThemeData => ThemeData.dark().copyWith(
-          accentColor: Colors.purple,
-        );
-  
+        accentColor: Colors.pink,
+      );
+
   ThemeData get _customThemeData => ThemeData.dark().copyWith(
-          accentColor: Color(0xff48A0EB),
-          primaryColorLight: Colors.white,
-          scaffoldBackgroundColor: Color(0xff16202B),
-          textTheme: TextTheme(
-            bodyText1: TextStyle(
-              color: Colors.white,
-            ),
-          )
-        );
+      accentColor: Color(0xff48A0EB),
+      primaryColorLight: Colors.white,
+      scaffoldBackgroundColor: Color(0xff16202B),
+      textTheme: TextTheme(
+        bodyText1: TextStyle(
+          color: Colors.white,
+        ),
+      ));
 
   ThemeChanger(int theme) {
     switch (theme) {
       case 1: // light
         _darkTheme = false;
         _customTheme = false;
-        _currentTheme = ThemeData.light();
+        _currentTheme = ThemeData.light().copyWith(
+          accentColor: Colors.pink,
+        );
         break;
       case 2: // Dark
         _darkTheme = true;
@@ -47,7 +48,9 @@ class ThemeChanger with ChangeNotifier {
       default:
         _darkTheme = false;
         _customTheme = false;
-        _currentTheme = ThemeData.light();
+        _currentTheme = ThemeData.light().copyWith(
+          accentColor: Colors.pink,
+        );
         break;
     }
   }
@@ -58,7 +61,9 @@ class ThemeChanger with ChangeNotifier {
     if (value) {
       _currentTheme = this._darkThemeData;
     } else {
-      _currentTheme = ThemeData.light();
+      _currentTheme = ThemeData.light().copyWith(
+        accentColor: Colors.pink,
+      );
     }
     notifyListeners();
   }
@@ -69,7 +74,9 @@ class ThemeChanger with ChangeNotifier {
     if (value) {
       _currentTheme = this._customThemeData;
     } else {
-      _currentTheme = ThemeData.light();
+      _currentTheme = ThemeData.light().copyWith(
+        accentColor: Colors.pink,
+      );
     }
     notifyListeners();
   }

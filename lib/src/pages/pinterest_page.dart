@@ -36,7 +36,7 @@ class _PinterestMenuLocation extends StatelessWidget {
     final primaryColor = appTheme.currentTheme.primaryColor;
     final accentColor = appTheme.currentTheme.accentColor;
     final backgroundColor = appTheme.currentTheme.scaffoldBackgroundColor;
-    
+
     return Positioned.fill(
       bottom: 10,
       child: Align(
@@ -114,13 +114,18 @@ class _PinterestGridState extends State<PinterestGrid> {
 
   @override
   Widget build(BuildContext context) {
+    int count = 2;
+    if (MediaQuery.of(context).size.width > 500) {
+      count = 3;
+    }
+
     return StaggeredGridView.countBuilder(
       controller: controller,
-      crossAxisCount: 4,
+      crossAxisCount: count,
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) => _PinterestItem(index),
       staggeredTileBuilder: (int index) =>
-          new StaggeredTile.count(2, index.isEven ? 2 : 3),
+          new StaggeredTile.count(1, index.isEven ? 1 : 2),
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 4.0,
     );

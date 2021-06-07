@@ -13,14 +13,18 @@ class SlideshowPage extends StatelessWidget {
     final appTheme = Provider.of<ThemeChanger>(context);
     final primaryColor = appTheme.currentTheme.primaryColor;
 
+    bool isLarge = MediaQuery.of(context).size.height > 500;
+
+    final children = [
+      Expanded(child: MiSlideShow()),
+      Expanded(child: MiSlideShow()),
+    ];
+
     return Scaffold(
       backgroundColor: (appTheme.darkTheme) ? primaryColor : Colors.white,
-      body: Column(
-        children: [
-          Expanded(child: MiSlideShow()),
-          Expanded(child: MiSlideShow()),
-        ],
-      ),
+      body: (isLarge)
+          ? Column(children: children)
+          : Row(children: children),
     );
   }
 }

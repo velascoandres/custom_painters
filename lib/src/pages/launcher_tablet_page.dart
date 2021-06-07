@@ -1,22 +1,42 @@
+import 'package:custom_painters/src/models/layout_model.dart';
 import 'package:custom_painters/src/routes/routes.dart';
 import 'package:custom_painters/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-class LauncherPage extends StatelessWidget {
+class LauncherTabletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     final appTheme = Provider.of<ThemeChanger>(context);
+    final layouModel = Provider.of<LayoutModel>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Diseños en Flutter - Telefono'),
+        title: Text('Diseños en Flutter - Tablet'),
         backgroundColor: appTheme.currentTheme.accentColor,
       ),
       drawer: _MenuPrincipal(),
-      body: _ListaOpciones(),
+
+      body: Row(
+        children: [
+          Container(
+            width: 300,
+            height: double.infinity,
+            child: _ListaOpciones(),
+          ),
+          Container(
+            width: 5,
+            height: double.infinity,
+            color: appTheme.darkTheme
+                ? Colors.grey
+                : appTheme.currentTheme.accentColor,
+          ),
+          Expanded(child: layouModel.currentPage)
+        ],
+      ),
+
+      // body: _ListaOpciones(),
     );
   }
 }
@@ -26,8 +46,6 @@ class _ListaOpciones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
 
     return ListView.separated(
@@ -44,12 +62,8 @@ class _ListaOpciones extends StatelessWidget {
         title: Text('${pageRoutes[i].title}'),
         trailing: Icon(Icons.chevron_right, color: appTheme.accentColor),
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => pageRoutes[i].page,
-            ),
-          );
+          final layouModel = Provider.of<LayoutModel>(context, listen: false);
+          layouModel.currentPage = pageRoutes[i].page;
         },
       ),
     );
@@ -61,10 +75,8 @@ class _MenuPrincipal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final appTheme = Provider.of<ThemeChanger>(context);
     final accentColor = appTheme.currentTheme.accentColor;
-
 
     return Drawer(
       child: SafeArea(
